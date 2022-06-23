@@ -1,14 +1,15 @@
 import os
-
+print('Senha root(MySql):')
+rootPasswordMySql = input()
 os.system('sudo echo "mysql-apt-config mysql-apt-config/unsupported-platform select abort" | /usr/bin/debconf-set-selections')
-os.system('sudo echo "mysql-apt-config mysql-apt-config/repo-codename   select trusty" | /usr/bin/debconf-set-selections')
+os.system('sudo echo "mysql-apt-config mysql-apt-config/repo-codename   select bionic" | /usr/bin/debconf-set-selections')
 os.system('sudo echo "mysql-apt-config mysql-apt-config/select-tools select" | /usr/bin/debconf-set-selections')
 os.system('sudo echo "mysql-apt-config mysql-apt-config/repo-distro select ubuntu" | /usr/bin/debconf-set-selections')
 os.system('sudo echo "mysql-apt-config mysql-apt-config/select-server select mysql-5.7" | /usr/bin/debconf-set-selections')
 os.system('sudo echo "mysql-apt-config mysql-apt-config/select-product select Apply" | /usr/bin/debconf-set-selections')
 
-os.system('sudo echo "mysql-community-server mysql-community-server/root-pass password $ROOT_PASSWORD" | /usr/bin/debconf-set-selections')
-os.system('sudo echo "mysql-community-server mysql-community-server/re-root-pass password $ROOT_PASSWORD" | /usr/bin/debconf-set-selections')
+os.system('sudo echo "mysql-community-server mysql-community-server/root-pass password ',rootPasswordMySql,'" | /usr/bin/debconf-set-selections')
+os.system('sudo echo "mysql-community-server mysql-community-server/re-root-pass password ',rootPasswordMySql,'" | /usr/bin/debconf-set-selections')
 os.system('sudo echo "mysql-community-server mysql-community-server/remove-data-dir boolean false" | /usr/bin/debconf-set-selections')
 os.system('sudo echo "mysql-community-server mysql-community-server/data-dir note" | /usr/bin/debconf-set-selections')
 os.system('export DEBIAN_FRONTEND=noninteractive')
