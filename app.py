@@ -1,7 +1,7 @@
 import os
 import time
 print('Senha usuario socinftp')
-input(passwd)
+passwd = input()
 print('Selecionar MySql 5.7 e Ubuntu Bionic')
 time.sleep(5)
 
