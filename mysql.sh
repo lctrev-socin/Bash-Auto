@@ -20,40 +20,11 @@ apt-get update
 apt-get --yes install mysql-client=5.7* mysql-community-server=5.7* mysql-server=5.7*
 
 
-SECURE_MYSQL=$(expect -c "
-set timeout 10
-spawn mysql_secure_installation
+mysql -e "UPDATE mysql.user SET Password = PASSWORD($MYSQL_ROOT_PASSWORD) WHERE User = 'root'"
+mysql -e "DROP USER ''@'localhost'"
+mysql -e "DROP USER ''@'$(hostname)'"
+mysql -e "DROP DATABASE test"
+mysql -e "FLUSH PRIVILEGES"
 
-expect "Enter password for user root:"
-send "$MYSQL\r"
-
-expect "Change the password for root ?\(Press y\|Y for Yes, any other key for No\) :"
-send "y\r"
-
-expect "New password:"
-send "$MYSQL_ROOT_PASSWORD\r"
-
-expect "Re-enter new password:"
-send "$MYSQL_ROOT_PASSWORD\r"
-
-expect "Do you wish to continue with the password provided?\(Press y\|Y for Yes, any other key for No\) :"
-send "y\r"
-
-expect "Remove anonymous users?\(Press y\|Y for Yes, any other key for No\) :"
-send "y\r"
-
-expect "Disallow root login remotely?\(Press y\|Y for Yes, any other key for No\) :"
-send "y\r"
-
-expect "Remove test database and access to it?\(Press y\|Y for Yes, any other key for No\) :"
-send "y\r"
-
-expect "Reload privilege tables now?\(Press y\|Y for Yes, any other key for No\) :"
-send "y\r"
-
-expect eof
-")
-
-echo "$SECURE_MYSQL"
 echo 'sql-mode=""' | /etc/mysql/mysql.conf.d/mysqld.cnf
 echo 'secure-file-priv=""s' | /etc/mysql/mysql.conf.d/mysqld.cnf
