@@ -1,4 +1,4 @@
-ROOT_PASSWORD="your_root_password"
+ROOT_PASSWORD="test"
 
 echo "mysql-apt-config mysql-apt-config/unsupported-platform select abort" | /usr/bin/debconf-set-selections
 echo "mysql-apt-config mysql-apt-config/repo-codename   select trusty" | /usr/bin/debconf-set-selections
@@ -16,4 +16,4 @@ export DEBIAN_FRONTEND=noninteractive
 wget https://dev.mysql.com/get/mysql-apt-config_0.8.22-1_all.deb
 sudo dpkg -i mysql-apt-config_0.8.22-1_all.deb
 apt-get update
-apt-get --yes --force-yes install mysql-server-5.7
+apt-get --yes install mysql-client=5.7* mysql-community-server=5.7* mysql-server=5.7*
