@@ -1,4 +1,5 @@
-ROOT_PASSWORD="test"
+echo Senha root mysql
+read ROOT_PASSWORD
 
 echo "mysql-apt-config mysql-apt-config/unsupported-platform select abort" | /usr/bin/debconf-set-selections
 echo "mysql-apt-config mysql-apt-config/repo-codename   select bionic" | /usr/bin/debconf-set-selections
@@ -17,3 +18,5 @@ wget https://dev.mysql.com/get/mysql-apt-config_0.8.22-1_all.deb
 sudo dpkg -i mysql-apt-config_0.8.22-1_all.deb
 apt-get update
 apt-get --yes install mysql-client=5.7* mysql-community-server=5.7* mysql-server=5.7*
+echo 'sql-mode=""' | /etc/mysql/mysql.conf.d/mysqld.cnf
+echo 'secure-file-priv=""s' | /etc/mysql/mysql.conf.d/mysqld.cnf
