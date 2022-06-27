@@ -1,7 +1,7 @@
 ROOT_PASSWORD="test"
 
 echo "mysql-apt-config mysql-apt-config/unsupported-platform select abort" | /usr/bin/debconf-set-selections
-echo "mysql-apt-config mysql-apt-config/repo-codename   select trusty" | /usr/bin/debconf-set-selections
+echo "mysql-apt-config mysql-apt-config/repo-codename   select bionic" | /usr/bin/debconf-set-selections
 echo "mysql-apt-config mysql-apt-config/select-tools select" | /usr/bin/debconf-set-selections
 echo "mysql-apt-config mysql-apt-config/repo-distro select ubuntu" | /usr/bin/debconf-set-selections
 echo "mysql-apt-config mysql-apt-config/select-server select mysql-5.7" | /usr/bin/debconf-set-selections
