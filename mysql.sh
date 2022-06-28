@@ -18,13 +18,3 @@ wget https://dev.mysql.com/get/mysql-apt-config_0.8.22-1_all.deb
 sudo dpkg -i mysql-apt-config_0.8.22-1_all.deb
 apt-get update
 apt-get --yes install mysql-client=5.7* mysql-community-server=5.7* mysql-server=5.7*
-
-
-mysql -e "UPDATE mysql.user SET Password = PASSWORD($MYSQL_ROOT_PASSWORD) WHERE User = 'root'"
-mysql -e "DROP USER ''@'localhost'"
-mysql -e "DROP USER ''@'$(hostname)'"
-mysql -e "DROP DATABASE test"
-mysql -e "FLUSH PRIVILEGES"
-
-echo 'sql-mode=""' | /etc/mysql/mysql.conf.d/mysqld.cnf
-echo 'secure-file-priv=""s' | /etc/mysql/mysql.conf.d/mysqld.cnf
